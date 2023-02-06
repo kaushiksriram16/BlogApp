@@ -9,10 +9,6 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
-
 app.use("/api/blog", blogRouter);
 
 app.use("/api/auth", authRouter);
@@ -23,5 +19,7 @@ var listener = app.listen(3000, async function () {
   } catch (err) {
     console.log("Error: ", err.message);
   }
-  console.log("Your app is listening on port " + listener.address().port);
+  // console.log("Your app is listening on port " + listener.address().port);
 });
+
+module.exports = app;

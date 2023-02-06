@@ -5,7 +5,7 @@ const checkToken = async (req, res, next) => {
   if(header !== undefined) {
     const token = header.split(" ")[1];
     jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
-        if(err) return res.status(403).json({message: "Invalid Token"});
+        if(err) return res.status(401).json({message: "Invalid Token"});
         else {
             req.user = data;
             next();
@@ -13,7 +13,7 @@ const checkToken = async (req, res, next) => {
     })
   }
   else {
-    res.status(500).json({message: "No Token found"});
+    res.status(401).json({message: "No Token found"});
   }
 };
 

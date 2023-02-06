@@ -23,7 +23,7 @@ router.post("/add", checkToken, async (req, res) => {
   });
   try {
     const b = await Blog.create(blog);
-    res.json(b);
+    res.status(201).json(b);
   } catch (err) {
     res.json(err.message);
   }
@@ -41,7 +41,7 @@ router.put("/:id", checkToken, async (req, res) => {
         blog.title = title;
         blog.description = description;
         const b = await blog.save();
-        res.json(b);
+        res.status(201).json(b);
       } catch (err) {
         res.json(err.message);
       }
@@ -61,7 +61,7 @@ router.delete("/:id", checkToken,async (req, res) => {
     const b = await Blog.findById(id);
     if(req.user.id == b.createdBy){
       b.delete();
-      res.json(b);
+      res.status(202).json(b);
     }
     else{
       throw new Error("You don't have access to delete this")
